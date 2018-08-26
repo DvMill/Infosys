@@ -21,7 +21,6 @@ public class PersonServiceimpl implements PersonService {
 
 		Person pep = (Person) jtm.queryForObject(sql, new Object[]{Name},
                 new BeanPropertyRowMapper(Person.class));
-		System.out.println(pep.toString());
         return pep;
 	}
 

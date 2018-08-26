@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<style>
+table,th,td {
+  border : 1px solid black;
+  border-collapse: collapse;
+}
+th,td {
+  padding: 5px;
+}
+</style>
+<body>
+
+<h2>Simple API</h2>
+
+<form > 
+<select name="customers" onchange="showPerson(this.value)">
+<option value="">Select a customer:</option>
+<option value="David">David</option>
+<option value="Brian">Brian</option>
+<option value="Dan">Dan</option>
+<option value="Daniel">Daniel</option>
+<option value="Dave">Dave</option>
+</select>
+</form>
+<br>
+<div id="txt">Personal Details</div>
+
+<script>
+function showPerson(str) {
+  var xhttp;    
+  if (str == "") {
+    document.getElementById("txt").innerHTML = "";
+    return;
+  }
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = displayPerson;
+  xhttp.open("GET", "person/"+str);
+  xhttp.send();
+
+  function displayPerson() {
+      if(xhttp.readyState===4 && xhttp.status===200) {
+          console.log(xhttp.responseText);
+          person = JSON.parse(xhttp.responseText);
+          console.log(person);
+      }
+  }
+}
+</script>
+
+</body>
+</html>
