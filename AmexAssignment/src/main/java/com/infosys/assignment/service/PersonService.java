@@ -8,6 +8,5 @@ import com.infosys.assignment.beans.Person;
 
 @Service
 public interface PersonService {
-	public Person findByName(String Name);
-	public List<Person> listPeople() ;
+	public Person findById(int id);
 }

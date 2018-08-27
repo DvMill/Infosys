@@ -1,10 +1,5 @@
 package com.infosys.assignment.beans;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 public class Person {
 	private int id;
 	private String name;

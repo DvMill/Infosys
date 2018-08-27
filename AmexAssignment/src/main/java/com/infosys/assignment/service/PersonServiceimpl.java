@@ -16,20 +16,12 @@ public class PersonServiceimpl implements PersonService {
     private JdbcTemplate jtm;
 
 	@Override
-	public Person findByName(String Name) {
-		String sql = "SELECT * FROM PERSON WHERE NAME=?";
+	public Person findById(int id) {
+		String sql = "SELECT * FROM PERSON WHERE ID=?";
 
-		Person pep = (Person) jtm.queryForObject(sql, new Object[]{Name},
+		Person pep = (Person) jtm.queryForObject(sql, new Object[]{id},
                 new BeanPropertyRowMapper(Person.class));
         return pep;
 	}
 
-	@Override
-	public List<Person> listPeople() {
-
-        String sql = "SELECT * FROM PERSON";
-		List<Person> person = jtm.query(sql, new BeanPropertyRowMapper<Person>(Person.class));
-
-        return person;
-	}
 }
