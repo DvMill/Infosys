@@ -1,52 +1,72 @@
 <!DOCTYPE html>
 <html>
 <style>
-table,th,td {
-  border : 1px solid black;
-  border-collapse: collapse;
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
 }
-th,td {
-  padding: 5px;
+
+th, td {
+	padding: 5px;
 }
 </style>
 <body>
 
-<h2>Simple API</h2>
+	<h2>Simple API</h2>
 
-<form > 
-<select name="customers" onchange="showPerson(this.value)">
-<option value="">Select a customer:</option>
-<option value="David">David</option>
-<option value="Brian">Brian</option>
-<option value="Dan">Dan</option>
-<option value="Daniel">Daniel</option>
-<option value="Dave">Dave</option>
-</select>
-</form>
-<br>
-<div id="txt">Personal Details</div>
+	<form>
+		<select name="customers" onchange="showPerson(this.value)">
+			<option value="" >Please Select a Name:</option>
+			<option value="David">David</option>
+			<option value="Brian">Brian</option>
+			<option value="Dan">Dan</option>
+			<option value="Daniel">Daniel</option>
+			<option value="Dave">Dave</option>
+		</select>
+	</form>
+	<br>
+	<div class="container">
+	<h1>Personal Information</h1>
+		<div class="formgroup">
+			<label for="p_name" >Name:</label> <input class="form-control" type="text" id="name" disabled/> <br>
+		</div>
+		<div class="formgroup">
+			<label for="p_address">Address:</label> <input class="form-control" type="text" id="address" disabled/> <br>
+		</div>
+		<div class="formgroup">
+			<label for="p_phonenumber">Phone Number:</label> <input class="form-control" type="text" id="phonenumber" disabled/> <br>
+		</div>
+	</div>
 
-<script>
-function showPerson(str) {
-  var xhttp;    
-  if (str == "") {
-    document.getElementById("txt").innerHTML = "";
-    return;
-  }
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = displayPerson;
-  xhttp.open("GET", "person/"+str);
-  xhttp.send();
+	<script>
+		function showPerson(str) {
+			var xhttp;
+			if (str == "") {
+				document.getElementById("txt").innerHTML = "";
+				return;
+			}
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = displayPerson;
+			xhttp.open("GET", "person/" + str);
+			xhttp.send();
 
-  function displayPerson() {
-      if(xhttp.readyState===4 && xhttp.status===200) {
-          console.log(xhttp.responseText);
-          person = JSON.parse(xhttp.responseText);
-          console.log(person);
-      }
-  }
-}
-</script>
+			function displayPerson() {
+				if (xhttp.readyState === 4 && xhttp.status === 200) {
+					console.log(xhttp.responseText);
+					person = JSON.parse(xhttp.responseText);
+					console.log(person);
+					populate();
+				}
+
+			}
+		}	
+		var person = {};
+		function populate() {
+			document.getElementById("name").value = person.name;
+			document.getElementById("address").value = person.address;
+			document.getElementById("phonenumber").value = person.phonenumber;
+		}
+	</script>
 
 </body>
 </html>
